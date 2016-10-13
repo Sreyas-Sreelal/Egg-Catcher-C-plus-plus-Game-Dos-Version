@@ -2,9 +2,9 @@
 
 |-------SS---EGG---CATCHER---GAME---C++---BY---SREYAS------------------|
 |                                                                      |
-|                Author:Sreyas                                         |
+|                Author:Console-Gamers(Sreyas and Anandu)              |
 |                Use A and D to move                                   |
-|   		 10 Score for each egg                                 |
+|   		           10 Score for each egg                                 |
 |                                                                      |
 |----------------------------------------------------------------------|
 
