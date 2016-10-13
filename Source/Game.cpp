@@ -9,19 +9,23 @@
 |----------------------------------------------------------------------|
 
 */
-#include<iostream.h>
+#include<fstream.h>
 #include<conio.h>
 #include<stdlib.h>
 #include<dos.h>
+#include<stdio.h>
+#include<string.h>
 
 #include "register.cpp"
 
 int gameover = 0,x,y,width,height,bx,by,score=0;
+
 enum DIRECTION
 {
 LEFT,RIGHT
 }dir;
 
+P_DATA s[100],temp;
 
 void setup()
 {
@@ -132,17 +136,19 @@ void getkey()
 void menu()
 {
  int res;
+
  cout<<"1.Login\n\
 	2.Register\n\
 	3.Highscores\n\
 	4.Help\n\
 	5.About\n";
+  cin>>res;
 
  switch(res)
  {
 
   case 1:
-   login();
+   Login();
 
   break;
 
@@ -167,39 +173,81 @@ void menu()
 
 }
 
+void connect()
+{
+ int i=0;
+ ifstream fin("data.dat");
 
+ while(!fin.eof())
+ {
+  fin.read((char*)&s[i],sizeof(s[i]));
+  if(fin.eof())
+  break;
+  i++;
+ }
+
+ data_size = i;
+
+ fin.close();
+
+}
+
+
+void Login()
+{
+ temp.P_GET();
+}
+
+void Register()
+{
+ temp.P_GET();
+}
+
+void Save()
+{
+
+}
 
 void main()
 {
 
  clrscr();
- width = 45;
- height = 20;
 
- y = height-2;
- x = width/2;
+ connect();
+ menu();
 
-
-
- setup();
-
- while(!gameover)
+ if(_logined)
  {
-  delay(150);
-  setup();
-  getkey();
-  createblock();
 
-  while(by!=20&&!gameover)
+
+  width = 45;
+  height = 20;
+
+  y = height-2;
+  x = width/2;
+
+
+
+  setup();
+
+  while(!gameover)
   {
-   delay(200);
-   moveblockdown();
+   delay(150);
    setup();
    getkey();
+   createblock();
+
+   while(by!=20&&!gameover)
+   {
+    delay(200);
+    moveblockdown();
+    setup();
+    getkey();
+   }
+
   }
 
  }
-
  getch();
 
 }
