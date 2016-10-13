@@ -2,9 +2,9 @@
 
 |-------SS---EGG---CATCHER---GAME---C++---BY---SREYAS------------------|
 |                                                                      |
-|                Author:Console-Gamers(Sreyas and Anandu)              |
+|                Author:Sreyas                                         |
 |                Use A and D to move                                   |
-|   		           10 Score for each egg                                 |
+|   		 10 Score for each egg                                 |
 |                                                                      |
 |----------------------------------------------------------------------|
 
@@ -13,6 +13,8 @@
 #include<conio.h>
 #include<stdlib.h>
 #include<dos.h>
+
+#include "register.cpp"
 
 int gameover = 0,x,y,width,height,bx,by,score=0;
 enum DIRECTION
@@ -77,8 +79,8 @@ void setup()
 void createblock()
 {
  bx=random(width-1)+5;
- by=0;//random(y-3);
- //if(bx<x+5||bx>x+5) createblock();
+ by=0;
+
 }
 
 void moveblockdown()
@@ -113,10 +115,10 @@ void getkey()
   switch(getch())
   {
    case 'd':
-   x+=2;//dir  = RIGHT;
+   x+=2;
    break;
    case 'a':
-   x-=2;//dir  = LEFT;
+   x-=2;
    break;
    case 'x':
    gameover  = 1;
@@ -127,20 +129,45 @@ void getkey()
 
 }
 
-void mover()
+void menu()
 {
+ int res;
+ cout<<"1.Login\n\
+	2.Register\n\
+	3.Highscores\n\
+	4.Help\n\
+	5.About\n";
 
- switch(dir)
+ switch(res)
  {
-  case LEFT:
-  x--;
+
+  case 1:
+   login();
+
   break;
-  case RIGHT:
-  x++;
+
+  case 2:
+    Register();
+
   break;
+
+  case 3:
+    //need to work on
+  break;
+
+  case 4:
+   //need to work on
+  break;
+
+  case 5:
+   //need to work on
+  break;
+
  }
 
 }
+
+
 
 void main()
 {
@@ -149,7 +176,7 @@ void main()
  width = 45;
  height = 20;
 
- y = height-2;//height/2;
+ y = height-2;
  x = width/2;
 
 
@@ -160,23 +187,19 @@ void main()
  {
   delay(150);
   setup();
-  //mover();
   getkey();
   createblock();
 
   while(by!=20&&!gameover)
   {
-   delay(200);//random(101)+50);
+   delay(200);
    moveblockdown();
    setup();
-  // mover();
    getkey();
   }
 
  }
 
  getch();
-
-
 
 }
