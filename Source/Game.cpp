@@ -26,27 +26,38 @@ void setup()
  int i,j;
 
  clrscr();
- cout<<"\t\tSCORE: " <<score<<endl<<endl;
+ cout<<"\t\t||||SCORE|||||: " <<score<<endl<<"Hint:Press x to close the game"<<endl;
  for(i=0;i<=height;i++)
  {
 
   for(j=0;j<=width;j++)
   {
-    if(i==0||i==height||j==0||j==width)
+    if(i==y&&j==width-2)
+    cout<<"#";
+
+    else if(i==0||i==height||j==0||j==width)
     {
-     cout<<"#";
+
+     if(i==y&&j==width)
+     continue;
+
+     else
+      cout<<"#";
+
     }
+
+
 
     else
     if(i==y&&j==x)
     {
-      cout<<"U";
+      cout<<"|_|";
     }
 
     else
     if(i==by&&j==bx)
     {
-     cout<<"o";
+     cout<<"O";
     }
 
     else
@@ -66,7 +77,7 @@ void setup()
 void createblock()
 {
  bx=random(width-1)+5;
- by=random(y-3);
+ by=0;//random(y-3);
  //if(bx<x+5||bx>x+5) createblock();
 }
 
@@ -75,19 +86,19 @@ void moveblockdown()
 
  by++;
 
- if(by==y&&bx==x)
+ if(by==y&&(x==bx||x==bx+1||x==bx-1||x==bx-2||x==bx+2))
  {
  score+=10;
  createblock();
 
  }
 
- if(x==0)
+ if(x<=0)
  {
-  x = width - 1;
+  x = width - 3;
  }
 
- else if(x==width)
+ else if(x>=width-2)
  {
   x = 1;
  }
@@ -102,10 +113,10 @@ void getkey()
   switch(getch())
   {
    case 'd':
-   dir  = RIGHT;
+   x+=2;//dir  = RIGHT;
    break;
    case 'a':
-   dir  = LEFT;
+   x-=2;//dir  = LEFT;
    break;
    case 'x':
    gameover  = 1;
@@ -138,7 +149,7 @@ void main()
  width = 45;
  height = 20;
 
- y = height/2;
+ y = height-2;//height/2;
  x = width/2;
 
 
@@ -149,16 +160,16 @@ void main()
  {
   delay(150);
   setup();
-  mover();
+  //mover();
   getkey();
   createblock();
 
   while(by!=20&&!gameover)
   {
-   delay(random(101)+50);
+   delay(200);//random(101)+50);
    moveblockdown();
    setup();
-   mover();
+  // mover();
    getkey();
   }
 
