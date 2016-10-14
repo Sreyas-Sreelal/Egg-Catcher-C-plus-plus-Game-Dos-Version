@@ -52,8 +52,6 @@ void setup()
 
     }
 
-
-
     else
     if(i==y&&j==x)
     {
@@ -176,7 +174,7 @@ void menu()
 void connect()
 {
  int i=0;
- ifstream fin("data.dat");
+ ifstream fin("data.dat",ios::in);
 
  while(!fin.eof())
  {
@@ -196,17 +194,76 @@ void connect()
 void Login()
 {
  temp.P_GET();
+ int i,found=0;
+
+ for(i=0;i<data_size;i++)
+ {
+   if(strcmpi(temp.name,s[i].name)==0)
+   {
+    found = 1;
+    if(strcmp(temp.password,s[i].password)==0)
+    {
+    _logined=1;
+    P_INDEX = i;
+    getch();
+    break;
+    }
+   }
+ }
+
+ if(!found)
+ {
+  cout<<"You are not registered please register to continue ";
+  Register();
+ }
+ else
+ if(!_logined)
+ {
+ cout<<"You inputted wrong password ";
+ Login();
+ }
 }
 
 void Register()
 {
  temp.P_GET();
+ int i,found=0;
+
+ for(i=0;i<data_size;i++)
+ {
+  if(strcmpi(temp.name,s[i].name)==0)
+  {
+  found =1;
+  cout<<"Y\This account is registered please login \n";
+  Login();
+  break;
+  }
+
+ }
+ if(!found)
+ {
+  ofstream fout("data.dat",ios::app);
+  s[data_size] = temp;
+  P_INDEX = data_size;
+  fout.write((char*)&temp,sizeof(temp));
+  data_size++;
+  cout<<"Your account is registered succefully ";
+  fout.close();
+  _logined = 1;
+ }
+
 }
 
 void Save()
 {
-
+ ofstream fout("data.dat",ios::out);
+ for(int i=0;i<data_size;i++)
+ {
+   fout.write((char*)&s[i],sizeof(s[i]));
+ }
+ fout.close();
 }
+
 
 void main()
 {
@@ -247,6 +304,13 @@ void main()
 
   }
 
+ }
+
+ if(score>s[P_INDEX].pscore)
+ {
+  s[P_INDEX].pscore = score;
+  Save();
+  cout<<"You got high score : "<<score;
  }
  getch();
 
