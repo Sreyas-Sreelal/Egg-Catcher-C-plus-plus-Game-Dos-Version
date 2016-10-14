@@ -1,9 +1,11 @@
+
+
 /*
 Register system for console games by Sreyas
 
 */
 //global vars
-int data_size,_logined=0,_connected=0;//saving data size in a var is much more optimised than use tellg()
+int data_size,_logined=0,_connected=0,P_INDEX;//saving data size in a var is much more optimised than use tellg()
 //global functions
 void Register();
 
