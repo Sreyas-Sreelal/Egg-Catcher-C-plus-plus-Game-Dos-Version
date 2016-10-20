@@ -9,19 +9,17 @@
 |----------------------------------------------------------------------|
 
 */
-#
-include<fstream
-            .h> #include<conio
-                             .h> #include<stdlib
-                                              .h> #include<dos.h> #include<stdio
-                                                                               .h> #include<string
-                                                                                                .h> #include<graphics
-                                                                                                                 .h>
+#include <fstream.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <dos.h>
+#include <stdio.h>
+#include <string.h>
+#include <graphics.h>
 
 #include "register.cpp"
 
-    int gameover = 0,
-        x, y, width, height, bx, by, score = 0;
+int gameover = 0, x, y, width, height, bx, by, score = 0;
 
 enum DIRECTION
 {
@@ -56,16 +54,19 @@ void setup()
                     cprintf("#");
                 }
             }
+
             else if (i == y && j == x)
             {
                 textcolor(BROWN);
                 cprintf("|_|");
             }
+
             else if (i == by && j == bx)
             {
                 textcolor(WHITE);
                 cprintf("O");
             }
+
             else
             {
                 cout << " ";
@@ -74,6 +75,7 @@ void setup()
         cout << endl;
     }
 }
+
 
 void createblock()
 {
@@ -96,6 +98,7 @@ void moveblockdown()
     {
         x = width - 3;
     }
+
     else if (x >= width - 2)
     {
         x = 1;
@@ -195,6 +198,7 @@ void connect()
 
     fin.close();
 }
+
 
 void Login()
 {
@@ -298,11 +302,13 @@ void main()
     if (_logined)
     {
 
+
         width = 45;
         height = 21;
 
         y = height - 2;
         x = width / 2;
+
 
         setup();
 
@@ -334,6 +340,7 @@ void main()
         printf("\n\n\You got high score : %d ", score);
         getch();
     }
+
     else
     {
         clrscr();
